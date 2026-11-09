@@ -2,9 +2,13 @@ import { pool } from "../db.js";
 
 export const listarTareas = async (req, res) => {
   console.log(req.usuarioId);
-  const resultado = await pool.query("SELECT * FROM tareas");
+  const resultado = await pool.query(
+    "SELECT * FROM tareas WHERE usuario_id = $1",
+    [req.usuarioId],
+  );
   return res.json(resultado.rows);
 };
+
 export const listarTarea = async (req, res) => {
   const resultado = await pool.query("SELECT * FROM tareas WHERE id = $1", [
     req.params.id,
@@ -22,8 +26,8 @@ export const crearTarea = async (req, res, next) => {
 
   try {
     const { rows } = await pool.query(
-      "INSERT INTO tareas (titulo, descripcion) VALUES ($1, $2) RETURNING *",
-      [titulo, descripcion],
+      "INSERT INTO tareas (titulo, descripcion, usuario_id) VALUES ($1, $2, $3) RETURNING *",
+      [titulo, descripcion, req.usuarioId],
     );
     res.json(rows[0]);
     console.log(rows[0]);

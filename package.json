@@ -2,14 +2,14 @@
   "name": "PERN-stack",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "backend/index.js",
   "type": "module",
   "scripts": {
     "start": "node .",
     "dev": "nodemon ."
   },
   "keywords": [],
-  "author": "",
+  "author": "Agustin Gonzalez",
   "license": "ISC",
   "packageManager": "pnpm@10.29.3",
   "dependencies": {
